@@ -1,3 +1,4 @@
+import ReduxProvider from '@/redux/provider'
 import './globals.css'
 import { Albert_Sans } from 'next/font/google'
 
@@ -11,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={alb.className}>{children}</body>
+      <body className={alb.className}><ReduxProvider>{children}</ReduxProvider></body>
     </html>
   )
 }
