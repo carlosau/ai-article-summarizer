@@ -2,6 +2,7 @@
 import { BsLink } from 'react-icons/bs'; 
 import { BiSolidSend } from 'react-icons/bi';
 import { useState } from 'react';
+import { useLazyGetSummaryQuery } from '@/redux/article';
 
 export default function Demo() {
     const [article, setArticle] = useState({
@@ -9,10 +10,20 @@ export default function Demo() {
         summary: '',
     })
 
-    const handleSubmit = async (e) => {
-        alert('submitted')
-    }
+    const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery()
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        
+        const { data } = await getSummary({ articleUrl: article.url })
+
+        if (data?.summary) {
+            const newArticle = { ...article, summary: data.summary }
+            setArticle(newArticle)
+            console.log(newArticle)
+        }
+    }
+    
     return (
         <section className="mx-auto m-10 w-full max-w-xl">
             {/* Search bar */}

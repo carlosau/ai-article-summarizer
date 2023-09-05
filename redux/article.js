@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-require('dotenv').config()
 
-const rapidApiKey = process.env.RAPID_API_ARTICLE_KEY
+const rapidApiKey = process.env.NEXT_PUBLIC_RAPID_API_KEY
 
 export const articleApi = createApi({
     reducerPath: 'articleApi',
